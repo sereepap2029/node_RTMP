@@ -1,0 +1,30 @@
+<%- 
+include('global/v_meta', 
+{
+  title: "UNIX AND TOPSTEEL",
+}); 
+-%>
+<%- include('global/v_header'); -%>
+  <video id="videoPlayer" autoplay></video>
+  <script src="https://cdn.jsdelivr.net/npm/flv.js@1.6.2/dist/flv.min.js"></script>
+  <script>
+    // Connect to the RTMP server
+    const videoPlayer = document.getElementById('videoPlayer');
+    const rtmpUrl = 'http://localhost:8000/live/live_47536321_4v4aYMZanTrDGjcX45QdcvXmo0mo8K.flv'; // Replace with your server URL and stream name
+
+    if (typeof flvjs !== 'undefined') {
+      var flvPlayer = flvjs.createPlayer({
+        type: 'flv',
+        url: rtmpUrl,
+      });
+      flvPlayer.attachMediaElement(videoPlayer);
+      flvPlayer.load();
+    }
+  </script>
+  <button type="button" onclick="flvPlayer.play()">play</button>
+
+  
+
+
+
+<%- include('global/v_footer'); -%>

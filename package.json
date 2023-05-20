@@ -1,0 +1,45 @@
+{
+  "name": "node_rtmp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js && node rtmp_server.js",
+    "dev": "nodemon app.js",
+    "serv": "nodemon rtmp_server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sereepap2029/node_RTMP.git"
+  },
+  "author": "Dekgym3A",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sereepap2029/node_RTMP/issues"
+  },
+  "homepage": "https://github.com/sereepap2029/node_RTMP#readme",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "bootstrap": "^5.2.0",
+    "connect-session-knex": "^3.0.0",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "exceljs": "^4.3.0",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "jquery": "^3.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "knex": "^2.4.2",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.3.1",
+    "node-media-server": "^2.5.0",
+    "objection": "^3.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
