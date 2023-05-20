@@ -5,23 +5,49 @@ include('global/v_meta',
 }); 
 -%>
 <%- include('global/v_header'); -%>
-  <video id="videoPlayer" autoplay></video>
-  <script src="https://cdn.jsdelivr.net/npm/flv.js@1.6.2/dist/flv.min.js"></script>
+  <video id="videoPlayer" autoplay controls></video>
   <script>
+    var app_name="live"
+    var stream_name="live"
+    axios.get('http://<%=rtmp_host%>:<%=rtmp_port%>/api/streams')
+    .then(function (response) {
+      // handle success
+      let data=response.data;
+      let okey=Object.keys(data);
+      let live =data[okey]
+      let lkey=Object.keys(live);
+      let liveObj=live[lkey];
+      console.log(liveObj);
+      app_name=liveObj.publisher.app;
+      stream_name=liveObj.publisher.stream;
+      console.log(response.data);
+      initLive(app_name,stream_name)
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+    });
     // Connect to the RTMP server
-    const videoPlayer = document.getElementById('videoPlayer');
-    const rtmpUrl = 'http://localhost:8000/live/live_47536321_4v4aYMZanTrDGjcX45QdcvXmo0mo8K.flv'; // Replace with your server URL and stream name
+    var flvPlayer;
+    function initLive(app_name,stream_name){
+      const videoPlayer = document.getElementById('videoPlayer');
+      const rtmpUrl = 'http://<%=rtmp_host%>:<%=rtmp_port%>/'+app_name+'/'+stream_name+'.flv'; // Replace with your server URL and stream name
 
-    if (typeof flvjs !== 'undefined') {
-      var flvPlayer = flvjs.createPlayer({
-        type: 'flv',
-        url: rtmpUrl,
-      });
-      flvPlayer.attachMediaElement(videoPlayer);
-      flvPlayer.load();
+      if (typeof flvjs !== 'undefined') {
+        flvPlayer = flvjs.createPlayer({
+          type: 'flv',
+          url: rtmpUrl,
+        });
+        flvPlayer.attachMediaElement(videoPlayer);
+        flvPlayer.load();
+      }
     }
   </script>
   <button type="button" onclick="flvPlayer.play()">play</button>
+  <button type="button" onclick="flvPlayer.pause()">pause</button>
 
   
 

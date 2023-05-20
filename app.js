@@ -21,18 +21,10 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 //setup static and middleware
-app.use(
-  "/css",
-  express.static(path.resolve("node_modules", "bootstrap", "dist", "css"))
-);
-app.use(
-  "/js",
-  express.static(path.resolve("node_modules", "bootstrap", "dist", "js"))
-);
-app.use(
-  "/js",
-  express.static(path.resolve("node_modules", "axios", "dist"))
-);
+app.use("/css", express.static(path.resolve("node_modules", "bootstrap", "dist", "css")));
+app.use("/js", express.static(path.resolve("node_modules", "bootstrap", "dist", "js")));
+app.use("/js", express.static(path.resolve("node_modules", "axios", "dist")));
+app.use("/js", express.static(path.resolve("node_modules", "flv.js", "dist")));
 app.use("/js", express.static(path.resolve("node_modules", "jquery", "dist")));
 app.use("/", express.static(path.resolve("public")));
 app.use("/css", express.static(path.resolve("public/css")));
@@ -43,8 +35,8 @@ app.use("/webfonts", express.static(path.resolve("public/webfonts")));
 app.use("/media", express.static(path.resolve("public/media")));
 
 // set accept parameter and json request
-app.use("/", express.urlencoded({ extended: false,limit: '500mb', parameterLimit: 1000000 }));
-app.use("/", express.json({limit: '500mb'}));
+app.use("/", express.urlencoded({ extended: false, limit: "500mb", parameterLimit: 1000000 }));
+app.use("/", express.json({ limit: "500mb" }));
 
 // init Knex and session
 const knex = Knex({
@@ -71,12 +63,9 @@ app.use(
   })
 );
 
-
 app.use("/", routeHome);
 
 //listen
 app.listen(process.env.WEB_PORT, () => {
-  console.log(
-    `Server running at http://${process.env.WEB_HOST}:${process.env.WEB_PORT}`
-  );
+  console.log(`Server running at http://${process.env.WEB_HOST}:${process.env.WEB_PORT}`);
 });
